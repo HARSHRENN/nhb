@@ -1,3 +1,4 @@
+import { KanbanExample } from '../components/KanbanExample';
 import { PhotoMosaic } from '../components/PhotoExplorer';
 import { EditorialImage } from '../components/EditorialImage';
 import React, { useState } from 'react';
@@ -26,7 +27,7 @@ export function LeanCulturePage() {
       <p>{content.leanIntro}</p>
     </section>
 
-    <section className="brief-section wrap editorial-band"><EditorialImage src={content.plantPhoto || '/images/manufacturing-process.jpg'} alt={content.plantPhoto ? 'NHB plant' : 'Illustrative stock photograph of a manufacturing process line'} credit={content.plantPhoto ? 'NHB photography' : 'Illustrative stock photo · Homa Appliances / Unsplash'} /><div><span className="eyebrow">SMALL IMPROVEMENTS ADD UP</span><h2>Look closely.<br/>Make it better.</h2><p>Every workstation is a place to learn. Every person brings a perspective worth listening to.</p></div></section>
+    <section className="brief-section wrap editorial-band"><EditorialImage src={content.plantPhoto || '/images/india-kaizen.jpg'} alt={content.plantPhoto ? 'NHB plant' : 'AI-generated illustration of Indian staff and an international lean mentor'} credit={content.plantPhoto ? 'NHB photography' : 'AI-generated illustration'} /><div><span className="eyebrow">SMALL IMPROVEMENTS ADD UP</span><h2>Look closely.<br/>Make it better.</h2><p>Every workstation is a place to learn. Every person brings a perspective worth listening to.</p></div></section>
     <section className="brief-section wrap" aria-labelledby="lean-principles">
       <span className="eyebrow">HOW WE WORK</span>
       <h2 id="lean-principles">Improvement belongs to everyone.</h2>
@@ -37,6 +38,7 @@ export function LeanCulturePage() {
       </div>
     </section>
 
+    <KanbanExample />
     <PhotoMosaic title="Learning happens where the work happens." ids={['design','teamwork','operator','hands-on','research','workshop']} />
     <section className="brief-section wrap" aria-labelledby="kaizen-stories">
       <span className="eyebrow">KAIZEN IN PRACTICE</span>

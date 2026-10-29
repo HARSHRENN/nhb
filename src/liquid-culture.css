@@ -1,0 +1,22 @@
+.theme-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;color:#285746;border:1px solid #ffffffdb;border-radius:28%;background:linear-gradient(145deg,#ffffffa8,#d9eae36b);box-shadow:inset 0 1px 0 #fff,0 3px 9px #16383208;vertical-align:middle}.theme-icon>svg{display:block;flex-shrink:0}.nv-ico .theme-icon{border:0;background:transparent;box-shadow:none;border-radius:0}.nv-ico .theme-icon>svg{width:19px;height:19px}
+.impact-section{position:relative;isolation:isolate}
+.impact-section::before{content:'';position:absolute;z-index:-1;inset:90px -20px 70px;background:radial-gradient(ellipse at 15% 40%,#a9d8ca70,transparent 55%),radial-gradient(ellipse at 85% 15%,#c3d7e77a,transparent 55%);filter:blur(28px);pointer-events:none}
+.impact-card{--glass-x:50%;--glass-y:35%;isolation:isolate;background:linear-gradient(135deg,#ffffff85,#e0efea40);backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);border:1px solid #ffffffcf;box-shadow:inset 0 1px 1px #fff,inset 0 -1px 1px #507e6822,0 12px 32px #16383209;transition:transform .35s,box-shadow .35s,border-color .35s,background .35s}
+.impact-card::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(ellipse at var(--glass-x) var(--glass-y),#ffffffdd 0%,#ffffff50 22%,transparent 58%);opacity:.6;transition:opacity .3s}
+.impact-card::after{content:'';position:absolute;inset:1px;width:auto;height:auto;border-radius:inherit;border:1px solid transparent;border-top-color:#fff;border-left-color:#ffffff80;box-shadow:inset 0 0 22px #ffffff48;pointer-events:none;background:linear-gradient(115deg,transparent 25%,#ffffff45 48%,transparent 70%);background-size:220% 220%;background-position:var(--glass-x) var(--glass-y);transition:background-position .18s ease-out}
+.impact-card[aria-selected='true']{background:linear-gradient(135deg,#e4f5eea6,#b6d9ce63);border-color:#9fc9b9;box-shadow:inset 0 1px 1px white,inset 0 -1px 2px #47776225,0 15px 35px #16383212}
+.impact-card:focus-visible{outline:3px solid #386b5b;outline-offset:3px}
+.impact-card:active::before,.impact-card[aria-selected='true']::before{opacity:1}
+.impact-icon{background:transparent;overflow:visible}
+.stage-icon{overflow:visible}.why-icon{background:transparent}
+@media(hover:hover) and (pointer:fine){.impact-card:hover{transform:translateY(-4px) scale(1.012);box-shadow:inset 0 1px 2px #fff,0 22px 42px #16383219}.impact-card:hover::before{opacity:1}}
+.kanban-example>p{max-width:780px}.kanban-note{font-size:13px;color:#60756d}
+.kanban-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:26px}
+.kanban-column{min-width:0;padding:19px;border:1px solid #ffffffd9;border-radius:22px;background:#e0ece555}
+.kanban-column h3{display:flex;align-items:center;gap:9px;font-size:15px;margin:0 0 18px;color:#254b3f}
+.kanban-count{margin-left:auto;font-size:12px;color:#5a7569}.kanban-dot{width:7px;height:7px;border-radius:50%;background:#9baea6}.stage-1{background:#b99451}.stage-2{background:#43876d}
+.kanban-task{padding:18px;margin-bottom:12px;border-radius:15px;background:#ffffffb8;box-shadow:0 4px 15px #16383206;border:1px solid white}
+.kanban-task p{font-size:15px;margin:0 0 16px;line-height:1.5}.kanban-task button{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:44px;border:0;background:#d8e9df85;border-radius:10px;padding:9px 12px;text-align:left;color:#254c3d;font-size:12px;cursor:pointer}.kanban-task button:hover{background:#c9e1d4}.kanban-task button:focus-visible{outline:2px solid #386b5b;outline-offset:3px}
+.kanban-empty,.kanban-complete{font-size:12px;color:#60756d}.kanban-reset{margin-top:18px;min-height:44px}
+@media(max-width:650px){.kanban-board{grid-template-columns:minmax(0,1fr);gap:12px}.kanban-column{padding:17px}.kanban-column h3{margin-bottom:12px}.kanban-example .section-heading{gap:12px}.kanban-example .section-heading>.theme-icon{width:54px!important;height:54px!important}}
+@media(prefers-reduced-motion:reduce){.impact-card,.impact-card::before,.impact-card::after{transition:none}.impact-card:hover{transform:none}}

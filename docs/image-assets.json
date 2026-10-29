@@ -138,6 +138,36 @@
       "source": "https://www.pexels.com/photo/close-up-of-workshop-tools-16630111/",
       "license": "https://www.pexels.com/license/",
       "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/icons/",
+      "sourceOriginal": "docs/generated/nhb-liquid-icons-3x3.png",
+      "type": "AI-generated illustration",
+      "method": "Built-in image_gen tool",
+      "prompt": "Create a premium UI icon sprite sheet for an Indian engineering company website. EXACTLY 9 separate icons in a perfectly aligned 3 by 3 grid, square 1536x1536 canvas; each grid cell identical dimensions and each icon centered inside its cell with ample equal transparent gutters. Fully transparent background, NO tile backgrounds, NO grid lines, NO text, NO letters, NO numerals, NO logos. Render the same cohesive Apple-like liquid glass 3D style for every icon: translucent pale sage-green glass, forest-green edges, frosted ivory highlights, subtle brushed aluminium accents, soft studio lighting. Each symbol bold simple and recognizable even at 40px. Reading order: row1 col1 a group of three stylized human busts (people); row1 col2 a rising three-bar growth chart with upward arrow (growth); row1 col3 a simple hourglass (heritage); row2 col1 a globe with longitude/latitude arcs (international collaboration); row2 col2 two circular curved arrows forming an improvement loop (Kaizen); row2 col3 an open book (learning); row3 col1 a shield with a checkmark (quality); row3 col2 a small Kanban board with exactly three columns and four small blank rectangular cards (visual workflow); row3 col3 a compact factory with a sawtooth roof (manufacturing). Icon sizes and visual weights consistent. Absolutely no spillover between cells. No steel balls or ball bearing imagery. This sheet will be cut into 9 individual transparent PNG icons.",
+      "grid": "3×3, 1254×1254, 418px cells",
+      "crops": "192×192 PNG: people, growth, heritage, global, kaizen, learning, quality, kanban, manufacturing"
+    },
+    {
+      "path": "public/images/india-collaboration.jpg",
+      "sourceOriginal": "docs/generated/india-collaboration.png",
+      "type": "AI-generated illustration",
+      "method": "Built-in image_gen tool",
+      "prompt": "Create a professional photorealistic editorial website image, wide landscape 16:9. Illustrative scene in a realistic, clean Indian precision-engineering plant in Gujarat, not a real named company facility. A team of six professionals: four Indian men and women in their late 20s to 50s, one Japanese male lean mentor and one European female engineer. Most of the people are Indian. They collaborate around a simple physical Kanban board beside neatly organised machining cells, discussing colored blank task cards, with one Indian woman pointing thoughtfully at a card. Plain sage and navy workwear, appropriate safety glasses and closed footwear, natural skin texture, candid unposed expressions. Warm daylight, pale sage glass partitions, brushed metal, tidy modest contemporary Indian industrial interior. Subtle visual evidence of 5S organisation and Kanban, without exaggerated futuristic equipment. Premium natural corporate photography, respectful and authentic. No company logos, no words or lettering, no flags, no stock watermark, no balls or ball bearings. Wide composition with people at center-right. Must be a new generic illustrative image, no claim to depict actual NHB employees."
+    },
+    {
+      "path": "public/images/india-quality.jpg",
+      "sourceOriginal": "docs/generated/india-quality.png",
+      "type": "AI-generated illustration",
+      "method": "Built-in image_gen tool",
+      "prompt": "Create a professional photorealistic editorial landscape website photograph, 16:9. Generic illustrative precision engineering quality laboratory in Gujarat India. An Indian woman quality engineer and an Indian male technician carefully reviewing a metal shaft with a digital caliper and measuring station, both wearing appropriate clear safety glasses and plain navy and sage workwear. A European colleague in the background listens and learns, subtly showing international knowledge exchange while Indian talent is central. Realistic comfortable clean industrial laboratory, organised tools, pale warm neutral and forest-green accents, soft daylight, genuine skin detail, credible small measuring equipment, documentary-style composition. Avoid cinematic exaggeration. No company logos, no brand names, no readable text, no balls, no ball bearings, no futuristic holograms. Scene is illustrative, not documentary footage of a named facility."
+    },
+    {
+      "path": "public/images/india-kaizen.jpg",
+      "sourceOriginal": "docs/generated/india-kaizen.png",
+      "type": "AI-generated illustration",
+      "method": "Built-in image_gen tool",
+      "prompt": "Create a professional natural editorial landscape website photo, 16:9. A practical skill-sharing session in a generic modern Indian manufacturing workshop in Gujarat. Three Indian technicians including a young woman and an experienced middle-aged man, with a Japanese visiting lean coach, collaborate at an organised workbench and a simple physical visual-management board with three columns of blank colored cards. Majority Indian people. Appropriate clear safety glasses, simple unbranded workwear, safe tidy environment, approachable candid poses, one technician demonstrating a tool while the others observe. Quiet warm daylight, sage green/ivory/steel palette, premium but realistic corporate photography, not posed advertising. No company logos, no words or lettering, no certificates, no statistics, no steel balls or ball bearings. An illustrative scene of Kaizen learning and international collaboration, not a depiction of actual NHB staff."
     }
   ]
 }
