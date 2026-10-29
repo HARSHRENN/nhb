@@ -1,0 +1,72 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {mkdtemp,rm,readFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
+import {videoEmbedUrl,mediaUrl} from '../src/lib/media.js';
+
+test('normalizes video links and rejects unsupported embeds',()=>{
+ assert.equal(videoEmbedUrl('https://www.youtube.com/watch?v=abcdefghijk&t=30'),'https://www.youtube-nocookie.com/embed/abcdefghijk?rel=0');
+ assert.equal(videoEmbedUrl('https://youtu.be/abcdefghijk'),'https://www.youtube-nocookie.com/embed/abcdefghijk?rel=0');
+ assert.equal(videoEmbedUrl('https://vimeo.com/123456'),'https://player.vimeo.com/video/123456');
+ for(const url of ['javascript:alert(1)','http://youtube.com/watch?v=abcdefghijk','https://youtube.com.attacker.test/watch?v=abcdefghijk','https://example.com/movie'])assert.equal(videoEmbedUrl(url),'');
+ assert.equal(mediaUrl('/uploads/photo.webp'),'/uploads/photo.webp');assert.equal(mediaUrl('//attacker.test/photo'),'');
+});
+
+test('CMS publication, forms, uploads, metadata and persistence',async t=>{
+ const dir=await mkdtemp(path.join(tmpdir(),'nhb-brief-test-'));
+ let child;let base;
+ const start=()=>new Promise((resolve,reject)=>{
+  child=spawn(process.execPath,['server/server.js'],{cwd:process.cwd(),env:{...process.env,DATA_DIR:dir,PORT:'0',ADMIN_TOKEN:'test-admin-key',NODE_ENV:'production'},stdio:['ignore','pipe','pipe']});
+  let output='';child.stdout.on('data',chunk=>{output+=chunk;const match=output.match(/http:\/\/127\.0\.0\.1:(\d+)/);if(match){base=match[0];resolve();}});child.stderr.on('data',()=>{});child.once('error',reject);child.once('exit',code=>{if(!base)reject(new Error(`Server exited: ${code}`));});
+ });
+ const stop=()=>new Promise(resolve=>{if(child.exitCode!==null)return resolve();child.once('exit',resolve);child.kill();});
+ t.after(async()=>{if(child)await stop();await rm(dir,{recursive:true,force:true});});
+ await start();
+ const request=async(url,{method='GET',body,admin=false,raw=false}={})=>{
+  const response=await fetch(base+url,{method,headers:{...(admin?{Authorization:'Bearer test-admin-key'}:{}),...(body&&!(body instanceof FormData)?{'Content-Type':'application/json'}:{})},body:body instanceof FormData?body:body?JSON.stringify(body):undefined});
+  return {status:response.status,data:raw?await response.text():await response.json()};
+ };
+ assert.equal((await request('/api/admin')).status,401);
+ assert.equal((await request('/api/jobs')).data.length,0);
+ assert.equal((await request('/api/gallery')).data.length,0);
+ const job={title:'Quality engineer',department:'Quality',location:'Amalsad',experience:'2 years',shortDesc:'Work with our quality team.',status:'draft'};
+ let response=await request('/api/jobs',{method:'POST',body:job});assert.equal(response.status,401);
+ response=await request('/api/jobs',{method:'POST',admin:true,body:job});assert.equal(response.status,201);const jobId=response.data.id;
+ assert.equal((await request('/api/jobs')).data.length,0);
+ await request(`/api/jobs/${jobId}`,{method:'PUT',admin:true,body:{status:'active',title:'Updated engineer'}});
+ assert.equal((await request('/api/jobs')).data[0].title,'Updated engineer');
+ await request(`/api/jobs/${jobId}`,{method:'DELETE',admin:true});assert.equal((await request('/api/jobs')).data.length,0);
+ const media={type:'video',title:'Kaizen day',category:'Kaizen Events',date:'2026-10-28',caption:'Team improvement workshop.',videoUrl:'https://youtu.be/abcdefghijk',featured:true,published:false};
+ response=await request('/api/gallery',{method:'POST',admin:true,body:{...media,videoUrl:'https://example.com/movie'}});assert.equal(response.status,400);
+ response=await request('/api/gallery',{method:'POST',admin:true,body:media});const mediaId=response.data.id;assert.equal(response.status,201);
+ assert.equal((await request('/api/gallery')).data.length,0);
+ await request(`/api/gallery/${mediaId}`,{method:'PUT',admin:true,body:{published:true,caption:'Edited caption'}});
+ const published=(await request('/api/gallery')).data[0];assert.equal(published.caption,'Edited caption');assert.match(published.videoUrl,/youtube-nocookie/);assert.equal(published.featured,true);
+ const certificate=new FormData();certificate.append('document',new Blob(['%PDF-1.7\nTest certificate'],{type:'application/pdf'}),'certificate.pdf');
+ response=await request('/api/documents/upload',{method:'POST',admin:true,body:certificate});assert.equal(response.status,201);assert.match(response.data.url,/\.pdf$/);assert.equal((await fetch(base+response.data.url)).status,200);
+ const certificateUrl=response.data.url;
+ assert.equal((await request('/api/content',{method:'PUT',admin:true,body:{certifications:[{code:'ISO 14001',title:'Environment',logoUrl:'javascript:alert(1)'}]}})).status,400);
+ assert.equal((await request('/api/content',{method:'PUT',admin:true,body:{certifications:[{code:'IATF 16949',title:'Quality',url:certificateUrl}]}})).status,200);
+ const invalidUpload=new FormData();invalidUpload.append('photos',new Blob(['<svg></svg>'],{type:'image/svg+xml'}),'unsafe.svg');assert.equal((await request('/api/gallery/upload',{method:'POST',admin:true,body:invalidUpload})).status,400);
+ const upload=new FormData();upload.append('photos',new Blob([Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a4qkAAAAASUVORK5CYII=','base64')],{type:'image/png'}),'photo.png');
+ response=await request('/api/gallery/upload',{method:'POST',admin:true,body:upload});assert.equal(response.status,201);assert.match(response.data[0].url,/^\/uploads\/.*\.png$/);assert.equal((await fetch(base+response.data[0].url)).status,200);
+ response=await request('/api/contact',{method:'POST',body:{name:'Test visitor',email:'invalid',message:'Hello'}});assert.equal(response.status,400);
+ response=await request('/api/contact',{method:'POST',body:{name:'Test visitor',email:'test@example.com',message:'Please contact me.'}});assert.equal(response.status,201);const contactId=response.data.id;
+ const quote=new FormData();quote.append('companyName','Test company');quote.append('email','test@example.com');quote.append('drawingFile',new Blob(['%PDF-test'],{type:'application/pdf'}),'drawing.pdf');
+ response=await request('/api/quotes',{method:'POST',body:quote});assert.equal(response.status,201);const fileUrl=response.data.quote.drawingUrl;assert.equal((await fetch(base+fileUrl)).status,401);assert.equal((await fetch(base+fileUrl,{headers:{Authorization:'Bearer test-admin-key'}})).status,200);
+ const application=new FormData();application.append('applicantName','Test applicant');application.append('email','test@example.com');application.append('jobTitle','Quality engineer');assert.equal((await request('/api/applications',{method:'POST',body:application})).status,201);
+ response=await request('/api/content',{method:'PUT',admin:true,body:{heroTitle:'A new approved heading',corporateVideoUrl:'https://vimeo.com/123456',evpApproved:true,contactsApproved:true}});assert.equal(response.status,200);assert.equal((await request('/api/content')).data.heroTitle,'A new approved heading');
+ response=await request('/api/pages',{method:'POST',admin:true,body:{title:'Plant news',slug:'plant-news',description:'News from our plant.',body:'An approved update.',published:true}});assert.equal(response.status,201);const pageId=response.data.id;
+ assert.equal((await request('/api/pages')).data.length,1);
+ response=await request('/plant-news',{raw:true});assert.equal(response.status,200);assert.match(response.data,/<title>Plant news \| NHB<\/title>/);assert.match(response.data,/News from our plant\./);
+ assert.equal((await request('/unknown-page',{raw:true})).status,404);
+ assert.match((await request('/sitemap.xml',{raw:true})).data,/plant-news/);
+ await request('/api/stats/track-view',{method:'POST',body:{path:'/careers',session:'one-session'}});await request('/api/stats/track-view',{method:'POST',body:{path:'/products',session:'one-session'}});
+ response=await request('/api/admin',{admin:true});assert.equal(response.data.stats.pageViews,2);assert.equal(response.data.stats.sessions,1);assert.equal(response.data.contacts[0].id,contactId);assert.equal(response.data.quotes.length,1);assert.equal(response.data.applications.length,1);
+ await stop();base='';await start();assert.equal((await request('/api/content')).data.heroTitle,'A new approved heading');assert.equal((await request('/api/gallery')).data.length,1);assert.equal((await request('/api/admin',{admin:true})).data.contacts[0].id,contactId);
+ await request(`/api/pages/${pageId}`,{method:'DELETE',admin:true});await request(`/api/gallery/${mediaId}`,{method:'DELETE',admin:true});assert.equal((await request('/api/pages')).data.length,0);assert.equal((await request('/api/gallery')).data.length,0);
+ assert.equal((await request('/api/content')).data.evpApproved,true);assert.equal((await request('/api/content')).data.contactsApproved,true);
+ const stored=JSON.parse(await readFile(path.join(dir,'db.json'),'utf8'));assert.equal(stored.contacts[0].id,contactId);
+});

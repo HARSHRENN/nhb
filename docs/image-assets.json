@@ -1,0 +1,143 @@
+{
+  "generatedOn": "2026-10-29",
+  "purpose": "Illustrative website imagery; these assets do not document NHB facilities, people or products.",
+  "assets": [
+    {
+      "path": "public/images/manufacturing-vision.jpg",
+      "sourceOriginal": "docs/manufacturing-vision-source.png",
+      "type": "AI-generated illustration",
+      "method": "Built-in image_gen tool",
+      "prompt": "Use case: stylized-concept. Create one premium wide landscape website hero illustration for an Indian precision manufacturer whose messaging is lean culture, lifelong learning and continuous improvement. A beautiful editorial architectural cutaway of a bright, modern manufacturing workshop: clean linear machining cells, an orderly assembly workbench, two small human figures collaborating over a process diagram, tall windows and warm daylight, soft sage green glass partitions, brushed aluminium details, dark forest green and warm ivory palette. Sophisticated tactile 3D architectural rendering, restrained and believable, understated professional corporate aesthetic with Apple-like material quality. Composition fills a wide 16:9 image, clear focal point in the center-right and calm space at left edge. This is illustrative generic manufacturing, not a documentary photograph of a real plant. No steel balls, no ball bearings, no floating spheres, no company logos, no words or letters, no fake certification badges, no neon sci-fi, no exaggerated automation. Output high quality landscape image suitable as a website visual."
+    },
+    {
+      "path": "public/images/manufacturing-craft.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "TruckRun",
+      "source": "https://unsplash.com/photos/a-man-working-on-a-machine-in-a-factory--TZcFPh253w",
+      "download": "https://images.unsplash.com/photo-1700727448550-c1af9cf9acc7?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+      "license": "https://unsplash.com/license",
+      "verification": "Source page explicitly says free to use under the Unsplash License."
+    },
+    {
+      "path": "public/images/manufacturing-process.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "Homa Appliances",
+      "source": "https://unsplash.com/photos/a-large-machine-in-a-large-building-pWUyHVJgLhg",
+      "download": "https://images.unsplash.com/photo-1717386255773-1e3037c81788?auto=format&fit=crop&fm=jpg&q=80&w=1400",
+      "license": "https://unsplash.com/license",
+      "verification": "Source page explicitly says free to use under the Unsplash License."
+    },
+    {
+      "path": "public/images/cnc-machining.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "Sven Daniel",
+      "source": "https://unsplash.com/photos/a-close-up-of-a-machine-DV_rG1mjDxs",
+      "license": "https://unsplash.com/license",
+      "verification": "Source page identifies the photo as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/engineering-team.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "ThisisEngineering",
+      "source": "https://unsplash.com/photos/engineers-working-in-automotive-factory-WjOWazUPAss",
+      "license": "https://unsplash.com/license",
+      "verification": "Source page identifies the photo as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/precision-measurement.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "Antoni Shkraba",
+      "source": "https://www.pexels.com/photo/high-angle-shot-of-person-measuring-an-object-7166998/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies the photo as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/engineer-workshop.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "ThisIsEngineering",
+      "source": "https://www.pexels.com/photo/female-engineer-standing-in-workshop-3862614/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies the photo as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/workshop-team.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "Mikhail Nilov",
+      "source": "https://www.pexels.com/photo/people-working-in-a-workshop-9242850/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/machine-workshop.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "Mikhail Nilov",
+      "source": "https://www.pexels.com/photo/a-machine-in-a-workshop-9242202/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/hands-on-engineering.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "cnrdmroglu",
+      "source": "https://www.pexels.com/photo/machinery-at-workshop-15546796/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/industrial-robotics.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "KJ Brix",
+      "source": "https://www.pexels.com/photo/close-up-of-modern-robotic-equipment-16544056/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/engineering-design.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "ThisIsEngineering",
+      "source": "https://www.pexels.com/photo/engineers-in-workshop-3912369/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/metalwork-detail.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "Tima Miroshnichenko",
+      "source": "https://www.pexels.com/photo/a-person-welding-at-a-workshop-5846247/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/engineering-research.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "ThisIsEngineering",
+      "source": "https://www.pexels.com/photo/female-engineer-working-in-workshop-3862630/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/machine-operator.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "Mikhail Nilov",
+      "source": "https://www.pexels.com/photo/a-man-operating-a-machine-9242287/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/automation-detail.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "Freek Wolsink",
+      "source": "https://www.pexels.com/photo/industrial-robot-arm-in-a-manufacturing-facility-34207359/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    },
+    {
+      "path": "public/images/measurement-tools.jpg",
+      "type": "Illustrative stock photo",
+      "photographer": "FFD Restorations",
+      "source": "https://www.pexels.com/photo/close-up-of-workshop-tools-16630111/",
+      "license": "https://www.pexels.com/license/",
+      "verification": "Source page identifies this photograph as free to use; downloaded 2026-10-29."
+    }
+  ]
+}
