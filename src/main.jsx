@@ -8,6 +8,7 @@ import './site-motion.css';
 import './mobile.css';
 import './liquid-culture.css';
 import './scrollbars.css';
+import './mobile-stability.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

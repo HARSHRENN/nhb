@@ -1,0 +1,31 @@
+/* Keep the document in one viewport; only designated carousels scroll sideways. */
+html, body { width:100%; max-width:100%; margin:0; overscroll-behavior-x:none; }
+#root, .site-shell { width:100%; max-width:100%; min-width:0; overflow-x:clip; }
+.site-shell > main, .site-shell > footer { min-width:0; max-width:100%; }
+.site-shell > main { width:100%; }
+.home-hero > *, .brief-grid > *, .contact-grid > *, .footer-grid > *,
+.corporate-film > *, .editorial-band > *, .photo-feature > * { min-width:0; }
+.impact-section::before { left:0; right:0; }
+.impact-story-stack { display:grid; min-width:0; max-width:650px; }
+.impact-story-stack > .impact-story-copy { grid-area:1/1; animation:none; }
+.impact-story-stack > .impact-story-copy[data-active='false'] { visibility:hidden; pointer-events:none; }
+@supports not (overflow:clip) {
+  html { overflow-x:hidden; }
+}
+@media(max-width:1050px) {
+  html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  .site-shell { min-height:100svh; }
+  .liquid-header { flex-shrink:0; }
+  .home-hero { min-height:0; }
+  .impact-grid, .photo-story-tabs, .filter-row { overscroll-behavior-x:contain; }
+  .brief-page-heading, .brief-section, .hero-copy, .impact-story { overflow-wrap:anywhere; }
+  .cms-form input, .cms-form select, .cms-form textarea { font-size:16px; }
+  /* Mobile toolbars resize the visual viewport: reserve image space independently. */
+  .hero-auto-gallery { contain:layout paint; }
+}
+@media(max-width:900px) {
+  .motion-enabled [data-reveal], .motion-enabled [data-revealed='true'] { transform:none; opacity:1; transition:none; }
+  .impact-story { align-items:stretch; flex-direction:column; }
+  .impact-story-stack { width:100%; }
+  .impact-story .impact-action { align-self:flex-start; min-height:46px; }
+}

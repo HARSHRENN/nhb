@@ -104,22 +104,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-::-webkit-scrollbar-track {
-  background: #0b1120;
-}
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
-}
-
 /* NHB: a light, glass-led corporate identity. */
 :root { --ink:#1d2534; --muted:#697383; --blue:#0069d9; }
 body { background:#f7f9fc; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; }
@@ -224,8 +208,6 @@ button:focus-visible,a:focus-visible { outline:3px solid #0071e3; outline-offset
 .inner-glass-page [class*="text-amber-"] { color:#91600b; }
 .inner-glass-page .bg-grid-pattern { background-image:none; }
 .inner-glass-page [class*="shadow-2xl"],.inner-glass-page [class*="shadow-xl"] { box-shadow:0 12px 35px #233c5d08; }
-::-webkit-scrollbar-track { background:#f1f5f9; }
-::-webkit-scrollbar-thumb { background:#bdcad9; }
 @media(min-width:1500px) { .home-hero { min-height:710px; } }
 @media(max-width:1050px) { .desktop-nav { gap:15px; } .wrap { width:calc(100% - 48px); } .brand-caption { font-size:6px; } .hero-copy h1 { letter-spacing:-2.5px; } .sphere-main { width:220px; height:220px; } .profile-section,.people-section { gap:40px; } }
 @media(max-width:850px) { .desktop-nav { display:none; } .menu-toggle { display:block; padding:8px; } .nav-quote { margin-left:auto; } .mobile-nav { display:flex; flex-direction:column; padding:10px 24px 24px; gap:3px; } .mobile-nav button,.mobile-nav a { text-align:left; padding:12px; font-size:14px; border-radius:10px; } .mobile-nav button:hover { background:#e7eff8; } .capability-grid { gap:12px; } .capability-card { padding:22px; } .card-copy h3 { font-size:21px; } .scene-caption { left:10%; } .sphere-main { left:15%; } }

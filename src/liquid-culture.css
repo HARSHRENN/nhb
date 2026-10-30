@@ -20,3 +20,23 @@
 .kanban-empty,.kanban-complete{font-size:12px;color:#60756d}.kanban-reset{margin-top:18px;min-height:44px}
 @media(max-width:650px){.kanban-board{grid-template-columns:minmax(0,1fr);gap:12px}.kanban-column{padding:17px}.kanban-column h3{margin-bottom:12px}.kanban-example .section-heading{gap:12px}.kanban-example .section-heading>.theme-icon{width:54px!important;height:54px!important}}
 @media(prefers-reduced-motion:reduce){.impact-card,.impact-card::before,.impact-card::after{transition:none}.impact-card:hover{transform:none}}
+
+/* Liquid highlights: light follows the pointer or the card's swipe position. */
+.impact-grid{perspective:1100px}
+.impact-card{--tilt-x:0deg;--tilt-y:0deg;--liquid-presence:.5;backdrop-filter:blur(28px) saturate(175%);-webkit-backdrop-filter:blur(28px) saturate(175%);background:linear-gradient(140deg,#ffffff80,#e0eee72b 55%,#cfdfec30);border-color:#ffffffd9;box-shadow:inset 0 2px 2px #fff,inset 0 -2px 5px #355b4920,0 16px 38px #16383210}
+.impact-card[aria-selected='true']{background:linear-gradient(135deg,#e9faf091,#bcddcf48 60%,#dceafa50);border-color:#ffffff;box-shadow:inset 0 2px 3px #fff,inset 0 -2px 7px #406f5229,0 18px 40px #16383214}
+.impact-liquid-lens{position:absolute;z-index:-1;pointer-events:none;inset:-40%;border-radius:45%;background:radial-gradient(ellipse at var(--glass-x) var(--glass-y),#ffffffb5 0%,#e6fff15c 12%,#c9e5ff35 23%,transparent 44%);opacity:calc(.3 + var(--liquid-presence)*.55);filter:blur(5px);transform:translate3d(0,0,0);transition:opacity .35s}
+.impact-card::after{border-right-color:#d5e4ff77;border-bottom-color:#9db7ab40;box-shadow:inset 2px 2px 5px #fff9,inset -2px -2px 8px #b0ccd03b;background:linear-gradient(115deg,transparent 20%,#fff6 40%,#d9f0ff33 48%,transparent 65%);background-size:250% 250%}
+.impact-card:active .impact-liquid-lens{opacity:1}
+.impact-story{background:linear-gradient(125deg,#ffffff91,#e5f0eb55);border:1px solid #ffffffde;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 1px 1px white,0 12px 35px #16383208}
+@media(hover:hover) and (pointer:fine){.impact-card:hover{transform:perspective(1100px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(-5px);box-shadow:inset 0 2px 3px #fff,inset 0 -2px 6px #94bba74d,0 24px 45px #16383220}.impact-card:hover .impact-liquid-lens{opacity:1}}
+@media(max-width:760px){.impact-section .impact-grid{display:flex;overflow-x:auto;gap:14px;scroll-snap-type:x mandatory;scroll-padding-inline:2px;overscroll-behavior-x:contain;padding:8px 2px 20px}.impact-section .impact-card{flex:0 0 82%;scroll-snap-align:start;min-width:0}.impact-card::before{opacity:calc(.35 + var(--liquid-presence)*.6)}}
+@media(prefers-reduced-motion:reduce){.impact-liquid-lens{display:none}.impact-card::before,.impact-card::after{background-position:center!important}.impact-card:hover{transform:none}.impact-card{transition:none}}
+
+/* A refractive ring expands from the touch point without capturing gestures. */
+.impact-liquid-ripple{position:absolute;pointer-events:none;z-index:0;left:var(--glass-x);top:var(--glass-y);width:180%;aspect-ratio:1;border-radius:50%;opacity:0;background:radial-gradient(circle,transparent 32%,#ffffff0a 42%,#fff9 48%,#c5eced66 50%,transparent 56%);transform:translate(-50%,-50%) scale(.08)}
+.impact-card>span:not(.impact-liquid-ripple):not(.impact-liquid-lens){position:relative;z-index:1}
+.impact-card::after{z-index:0}
+.impact-section::before{background:radial-gradient(ellipse at 12% 38%,#8bcdb477,transparent 48%),radial-gradient(ellipse at 83% 25%,#a9cee98a,transparent 50%),linear-gradient(125deg,transparent 35%,#e4d9ec50 55%,transparent 80%)}
+@media(hover:hover) and (pointer:fine){.impact-card:hover::after{border-top-color:white;border-left-color:white;box-shadow:inset 3px 3px 7px #fffc,inset -3px -3px 10px #b0ccd060}}
+@media(prefers-reduced-motion:reduce){.impact-liquid-ripple{display:none}.impact-card::before{background:radial-gradient(ellipse at center,#ffffff80,transparent 65%)}}

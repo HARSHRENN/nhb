@@ -1,6 +1,6 @@
 import { ThemeIcon } from './ThemeIcon';
 import React, { useId, useState, useRef, useEffect } from 'react';
-import { Users, TrendingUp, History, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { AnimatedStat } from './SiteMotion';
 
@@ -20,6 +20,26 @@ export function CompanyHighlights() {
     const card=event.currentTarget, rect=card.getBoundingClientRect();
     card.style.setProperty('--glass-x',`${Math.max(0,Math.min(100,(event.clientX-rect.left)/rect.width*100))}%`);
     card.style.setProperty('--glass-y',`${Math.max(0,Math.min(100,(event.clientY-rect.top)/rect.height*100))}%`);
+    if(event.pointerType==='mouse'){
+      card.style.setProperty('--tilt-x',`${(0.5-(event.clientY-rect.top)/rect.height)*5}deg`);
+      card.style.setProperty('--tilt-y',`${((event.clientX-rect.left)/rect.width-0.5)*5}deg`);
+    }
+  };
+  const rippleGlass=event=>{
+    illuminate(event);
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const ripple=event.currentTarget.querySelector('.impact-liquid-ripple');
+    if(!ripple?.animate)return;
+    ripple.getAnimations().forEach(animation=>animation.cancel());
+    ripple.animate([
+      {transform:'translate(-50%,-50%) scale(0.08)',opacity:0},
+      {transform:'translate(-50%,-50%) scale(0.45)',opacity:0.65,offset:0.25},
+      {transform:'translate(-50%,-50%) scale(1)',opacity:0}
+    ],{duration:850,easing:'cubic-bezier(.16,1,.3,1)'});
+  };
+  const resetGlass=event=>{
+    event.currentTarget.style.setProperty('--tilt-x','0deg');
+    event.currentTarget.style.setProperty('--tilt-y','0deg');
   };
   const followSwipe=()=>{
     cancelAnimationFrame(frame.current);
@@ -27,12 +47,17 @@ export function CompanyHighlights() {
       const list=grid.current;
       if(!list || list.scrollWidth<=list.clientWidth+1)return;
       const cards=[...list.children];
-      const nearest=cards.reduce((best,card,index)=>Math.abs(card.offsetLeft-list.offsetLeft-list.scrollLeft)<Math.abs(cards[best].offsetLeft-list.offsetLeft-list.scrollLeft)?index:best,0);
+      if(!cards.length)return;
+      const bounds=list.getBoundingClientRect();
+      const distance=card=>Math.abs(card.getBoundingClientRect().left-bounds.left);
+      const nearest=cards.reduce((best,card,index)=>distance(card)<distance(cards[best])?index:best,0);
       setSelected(nearest);
       cards.forEach(card=>{
         const rect=card.getBoundingClientRect(), bounds=list.getBoundingClientRect();
         card.style.setProperty('--glass-x',`${Math.max(0,Math.min(100,(bounds.left+bounds.width/2-rect.left)/rect.width*100))}%`);
         card.style.setProperty('--glass-y','45%');
+        const proximity=Math.max(0,1-Math.abs(rect.left+rect.width/2-bounds.left-bounds.width/2)/bounds.width);
+        card.style.setProperty('--liquid-presence',proximity.toFixed(3));
       });
     });
   };
@@ -43,7 +68,7 @@ export function CompanyHighlights() {
     <div ref={grid} onScroll={followSwipe} className="impact-grid" role="tablist" aria-label="Company highlights">
       {content.companyStats.map((stat,index)=>{
         const Icon=(stories[index]||stories[0]).icon;
-        return <button key={`${stat.label}-${index}`} className="impact-card" onPointerMove={illuminate} onPointerDown={illuminate} role="tab" aria-selected={active===index} aria-controls={`${id}-panel`} id={`${id}-tab-${index}`} tabIndex={active===index?0:-1} onClick={()=>setSelected(index)} onKeyDown={event=>{
+        return <button key={`${stat.label}-${index}`} className="impact-card" onPointerMove={illuminate} onPointerDown={rippleGlass} onPointerLeave={resetGlass} onPointerCancel={resetGlass} role="tab" aria-selected={active===index} aria-controls={`${id}-panel`} id={`${id}-tab-${index}`} tabIndex={active===index?0:-1} onClick={()=>setSelected(index)} onKeyDown={event=>{
           let next;
           if(event.key==='ArrowRight')next=(index+1)%content.companyStats.length;
           else if(event.key==='ArrowLeft')next=(index-1+content.companyStats.length)%content.companyStats.length;
@@ -52,6 +77,8 @@ export function CompanyHighlights() {
           else return;
           event.preventDefault();setSelected(next);document.getElementById(`${id}-tab-${next}`)?.focus();
         }}>
+          <span className="impact-liquid-lens" aria-hidden="true" />
+          <span className="impact-liquid-ripple" aria-hidden="true" />
           <span className="impact-card-top"><span className="impact-icon"><ThemeIcon name={Icon} size={46}/></span><ArrowUpRight className="impact-arrow" size={22}/></span>
           <span className="impact-number"><AnimatedStat value={stat.value} label={stat.label}/></span>
           <span className="impact-label">{stat.label}</span>
@@ -60,7 +87,7 @@ export function CompanyHighlights() {
       })}
     </div>
     {content.companyStats.length>0&&<div className="impact-story" role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-tab-${active}`}>
-      <div key={active} className="impact-story-copy"><span className="eyebrow">{story.eyebrow}</span><h3>{story.title}</h3><p>{story.text}</p></div>
+      <div className="impact-story-stack">{stories.map((item,index)=><div key={item.page} className="impact-story-copy" data-active={active===index || (active>=stories.length && index===0)} aria-hidden={!(active===index || (active>=stories.length && index===0))}><span className="eyebrow">{item.eyebrow}</span><h3>{item.title}</h3><p>{item.text}</p></div>)}</div>
       <button className="pill impact-action" onClick={()=>navigateTo(story.page)}>{story.action}<ArrowUpRight size={17}/></button>
     </div>}
   </section>;

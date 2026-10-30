@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
-/** One observer for entrance motion; scroll progress never rerenders the page. */
+/** One observer for section entrance motion. */
 export function SiteMotion({ page }) {
-  const progress = useRef(null);
   useEffect(() => {
     const main = document.getElementById('main-content');
     if (!main || page === 'admin') return;
@@ -10,7 +9,6 @@ export function SiteMotion({ page }) {
     const root = document.documentElement;
     const seen = new WeakSet();
     const selector = '.hero-copy, .hero-editorial, .company-numbers, .impact-section, .brief-page-heading, .brief-section, .brief-grid > .brief-card, .why-grid > .brief-card, .media-card';
-    let frame = 0;
     const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) { entry.target.dataset.revealed = 'true'; observer.unobserve(entry.target); }
@@ -39,26 +37,17 @@ export function SiteMotion({ page }) {
       record.addedNodes.forEach(node => { if (node instanceof Element) scan(node); });
     }));
     mutations.observe(main, { childList: true, subtree: true });
-    const update = () => {
-      frame = 0;
-      const distance = root.scrollHeight - window.innerHeight;
-      if (progress.current) progress.current.style.transform = `scaleX(${distance > 0 ? Math.min(1, window.scrollY / distance) : 0})`;
-    };
-    const scroll = () => { if (!frame) frame = requestAnimationFrame(update); };
     const visibility = () => { root.dataset.pageHidden = String(document.hidden); };
-    window.addEventListener('scroll', scroll, { passive: true });
-    window.addEventListener('resize', scroll);
     document.addEventListener('visibilitychange', visibility);
     media.addEventListener('change', preference);
-    update(); visibility();
+    visibility();
     return () => {
-      observer?.disconnect(); mutations.disconnect(); cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', scroll); window.removeEventListener('resize', scroll);
+      observer?.disconnect(); mutations.disconnect();
       document.removeEventListener('visibilitychange', visibility); media.removeEventListener('change', preference);
       root.classList.remove('motion-enabled');
     };
   }, [page]);
-  return <div className="reading-progress" aria-hidden="true"><span ref={progress} /></div>;
+  return null;
 }
 
 export function AnimatedStat({ value, label }) {

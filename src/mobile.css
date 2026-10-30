@@ -124,7 +124,7 @@ img, video, iframe { max-width:100%; }
   .photo-mosaic { grid-template-columns:minmax(0,1fr); }
   .photo-mosaic>button,.photo-mosaic>button:first-child { grid-column:auto; height:auto; aspect-ratio:1.35; }
   .photo-mosaic span { font-size:14px; }
-  .impact-grid { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding-inline:1px; padding:4px 1px 15px; overscroll-behavior-x:contain; scrollbar-width:thin; }
+  .impact-grid { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding-inline:1px; padding:4px 1px 15px; overscroll-behavior-x:contain; scrollbar-width:none; }
   .impact-card { flex:0 0 84%; min-width:0; padding:21px; min-height:190px; scroll-snap-align:start; }
   .impact-card-top { margin-bottom:12px; }
   .impact-card-bottom { padding-top:17px; }
@@ -134,9 +134,9 @@ img, video, iframe { max-width:100%; }
   .impact-number strong,.impact-number strong>span { font-size:clamp(35px,10vw,46px); }
   .impact-action { width:100%; justify-content:center; }
   .story-details { grid-template-columns:minmax(0,1fr); }
-  .filter-row { gap:7px; flex-wrap:nowrap; overflow-x:auto; max-width:100%; padding:4px 2px 10px; overscroll-behavior-x:contain; scrollbar-width:thin; }
+  .filter-row { gap:7px; flex-wrap:nowrap; overflow-x:auto; max-width:100%; padding:4px 2px 10px; overscroll-behavior-x:contain; scrollbar-width:none; }
   .filter-row button { flex-shrink:0; white-space:nowrap; }
-  .photo-story-tabs { flex-wrap:nowrap; overflow-x:auto; max-width:100%; padding:4px 2px 10px; overscroll-behavior-x:contain; scrollbar-width:thin; }
+  .photo-story-tabs { flex-wrap:nowrap; overflow-x:auto; max-width:100%; padding:4px 2px 10px; overscroll-behavior-x:contain; scrollbar-width:none; }
   .photo-story-tabs button { flex-shrink:0; white-space:nowrap; }
 }
 @media(max-width:380px) {
