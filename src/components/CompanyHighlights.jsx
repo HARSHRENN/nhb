@@ -15,7 +15,25 @@ export function CompanyHighlights() {
   const id=useId();
   const grid=useRef(null);
   const frame=useRef(null);
-  useEffect(()=>()=>cancelAnimationFrame(frame.current),[]);
+  const settle=useRef(null);
+  const finger=useRef(null);
+  useEffect(()=>()=>{cancelAnimationFrame(frame.current);clearTimeout(settle.current);},[]);
+  const moveDrop=(card,x,y)=>{
+    const rect=card.getBoundingClientRect();
+    card.style.setProperty('--drop-x',`${Math.max(36,Math.min(rect.width-36,x-rect.left))}px`);
+    card.style.setProperty('--drop-y',`${Math.max(36,Math.min(rect.height-36,y-rect.top))}px`);
+    card.dataset.touching='true';
+  };
+  const touchGlass=event=>{
+    const touch=event.touches[0];
+    if(!touch)return;
+    finger.current={x:touch.clientX,y:touch.clientY,card:event.currentTarget};
+    moveDrop(event.currentTarget,touch.clientX,touch.clientY);
+  };
+  const releaseDrop=()=>{
+    if(finger.current)finger.current.card.dataset.touching='false';
+    finger.current=null;
+  };
   const illuminate=event=>{
     const card=event.currentTarget, rect=card.getBoundingClientRect();
     card.style.setProperty('--glass-x',`${Math.max(0,Math.min(100,(event.clientX-rect.left)/rect.width*100))}%`);
@@ -43,6 +61,7 @@ export function CompanyHighlights() {
   };
   const followSwipe=()=>{
     cancelAnimationFrame(frame.current);
+    clearTimeout(settle.current);
     frame.current=requestAnimationFrame(()=>{
       const list=grid.current;
       if(!list || list.scrollWidth<=list.clientWidth+1)return;
@@ -51,14 +70,10 @@ export function CompanyHighlights() {
       const bounds=list.getBoundingClientRect();
       const distance=card=>Math.abs(card.getBoundingClientRect().left-bounds.left);
       const nearest=cards.reduce((best,card,index)=>distance(card)<distance(cards[best])?index:best,0);
-      setSelected(nearest);
-      cards.forEach(card=>{
-        const rect=card.getBoundingClientRect(), bounds=list.getBoundingClientRect();
-        card.style.setProperty('--glass-x',`${Math.max(0,Math.min(100,(bounds.left+bounds.width/2-rect.left)/rect.width*100))}%`);
-        card.style.setProperty('--glass-y','45%');
-        const proximity=Math.max(0,1-Math.abs(rect.left+rect.width/2-bounds.left-bounds.width/2)/bounds.width);
-        card.style.setProperty('--liquid-presence',proximity.toFixed(3));
-      });
+      // Native touch scrolling can cancel pointer events. Touch coordinates remain
+      // available, and the card moves underneath the finger during the swipe.
+      if(finger.current){const {card,x,y}=finger.current;moveDrop(card,x,y);}
+      settle.current=setTimeout(()=>setSelected(nearest),120);
     });
   };
   const active=selected<content.companyStats.length?selected:0;
@@ -68,7 +83,7 @@ export function CompanyHighlights() {
     <div ref={grid} onScroll={followSwipe} className="impact-grid" role="tablist" aria-label="Company highlights">
       {content.companyStats.map((stat,index)=>{
         const Icon=(stories[index]||stories[0]).icon;
-        return <button key={`${stat.label}-${index}`} className="impact-card" onPointerMove={illuminate} onPointerDown={rippleGlass} onPointerLeave={resetGlass} onPointerCancel={resetGlass} role="tab" aria-selected={active===index} aria-controls={`${id}-panel`} id={`${id}-tab-${index}`} tabIndex={active===index?0:-1} onClick={()=>setSelected(index)} onKeyDown={event=>{
+        return <button key={`${stat.label}-${index}`} className="impact-card" onPointerMove={event=>{if(event.pointerType==='mouse')illuminate(event);}} onPointerDown={event=>{if(event.pointerType==='mouse')rippleGlass(event);}} onPointerLeave={resetGlass} onPointerCancel={resetGlass} onTouchStart={touchGlass} onTouchMove={touchGlass} onTouchEnd={releaseDrop} onTouchCancel={releaseDrop} role="tab" aria-selected={active===index} aria-controls={`${id}-panel`} id={`${id}-tab-${index}`} tabIndex={active===index?0:-1} onClick={()=>{clearTimeout(settle.current);setSelected(index);}} onKeyDown={event=>{
           let next;
           if(event.key==='ArrowRight')next=(index+1)%content.companyStats.length;
           else if(event.key==='ArrowLeft')next=(index-1+content.companyStats.length)%content.companyStats.length;
@@ -79,6 +94,7 @@ export function CompanyHighlights() {
         }}>
           <span className="impact-liquid-lens" aria-hidden="true" />
           <span className="impact-liquid-ripple" aria-hidden="true" />
+          <i className="impact-glass-drop" aria-hidden="true" />
           <span className="impact-card-top"><span className="impact-icon"><ThemeIcon name={Icon} size={46}/></span><ArrowUpRight className="impact-arrow" size={22}/></span>
           <span className="impact-number"><AnimatedStat value={stat.value} label={stat.label}/></span>
           <span className="impact-label">{stat.label}</span>

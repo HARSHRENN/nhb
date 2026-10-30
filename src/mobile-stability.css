@@ -9,6 +9,33 @@ html, body { width:100%; max-width:100%; margin:0; overscroll-behavior-x:none; }
 .impact-story-stack { display:grid; min-width:0; max-width:650px; }
 .impact-story-stack > .impact-story-copy { grid-area:1/1; animation:none; }
 .impact-story-stack > .impact-story-copy[data-active='false'] { visibility:hidden; pointer-events:none; }
+/* Keep carousel repaints local and story changes independent of page layout. */
+.impact-section { contain:layout; }
+.impact-section .impact-grid { perspective:none; }
+.impact-section .impact-card { contain:paint; backdrop-filter:none; -webkit-backdrop-filter:none; }
+.impact-section .impact-story { backdrop-filter:none; -webkit-backdrop-filter:none; }
+.impact-story-stack { flex:1; }
+.impact-story .impact-action { width:240px; max-width:100%; }
+.impact-section .impact-glass-drop {
+  position:absolute; z-index:0; pointer-events:none; left:0; top:0;
+  width:76px; height:76px; margin:-38px 0 0 -38px;
+  border-radius:43% 57% 54% 46% / 48% 42% 58% 52%;
+  border:1px solid #ffffffd9;
+  background:radial-gradient(ellipse at 28% 20%,#fff 0%,#ffffffa3 8%,#ffffff20 35%,transparent 60%),linear-gradient(135deg,#ffffff6b,#cce9e51f 55%,#b3d5ee66);
+  box-shadow:inset 2px 3px 5px #ffffffeb,inset -3px -4px 8px #7ba99e55,0 5px 12px #254d4529;
+  opacity:0; transform:translate3d(var(--drop-x,50px),var(--drop-y,50px),0) scale(.65);
+  transition:transform 90ms ease-out,opacity .2s ease,border-radius .18s ease;
+}
+.impact-section .impact-card[data-touching='true'] .impact-glass-drop {
+  opacity:1; transform:translate3d(var(--drop-x,50px),var(--drop-y,50px),0) scale(1);
+  animation:impact-drop-flow 1.3s ease-in-out infinite alternate;
+}
+@keyframes impact-drop-flow {
+  to { border-radius:58% 42% 45% 55% / 42% 57% 43% 58%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .impact-section .impact-glass-drop { display:none; }
+}
 @supports not (overflow:clip) {
   html { overflow-x:hidden; }
 }
@@ -29,3 +56,4 @@ html, body { width:100%; max-width:100%; margin:0; overscroll-behavior-x:none; }
   .impact-story-stack { width:100%; }
   .impact-story .impact-action { align-self:flex-start; min-height:46px; }
 }
+@media(max-width:480px) { .impact-story .impact-action { width:100%; } }
