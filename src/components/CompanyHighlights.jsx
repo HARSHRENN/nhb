@@ -83,14 +83,14 @@ export function CompanyHighlights() {
     <div ref={grid} onScroll={followSwipe} className="impact-grid" role="tablist" aria-label="Company highlights">
       {content.companyStats.map((stat,index)=>{
         const Icon=(stories[index]||stories[0]).icon;
-        return <button key={`${stat.label}-${index}`} className="impact-card" onPointerMove={event=>{if(event.pointerType==='mouse')illuminate(event);}} onPointerDown={event=>{if(event.pointerType==='mouse')rippleGlass(event);}} onPointerLeave={resetGlass} onPointerCancel={resetGlass} onTouchStart={touchGlass} onTouchMove={touchGlass} onTouchEnd={releaseDrop} onTouchCancel={releaseDrop} role="tab" aria-selected={active===index} aria-controls={`${id}-panel`} id={`${id}-tab-${index}`} tabIndex={active===index?0:-1} onClick={()=>{clearTimeout(settle.current);setSelected(index);}} onKeyDown={event=>{
+        return <button key={`${stat.label}-${index}`} className="impact-card" onPointerMove={event=>{if(event.pointerType==='mouse')illuminate(event);}} onPointerDown={event=>{if(event.pointerType==='mouse')rippleGlass(event);}} onPointerUp={resetGlass} onPointerLeave={resetGlass} onPointerCancel={resetGlass} onTouchStart={touchGlass} onTouchMove={touchGlass} onTouchEnd={releaseDrop} onTouchCancel={releaseDrop} role="tab" aria-selected={active===index} aria-controls={`${id}-panel`} id={`${id}-tab-${index}`} tabIndex={active===index?0:-1} onClick={()=>{clearTimeout(settle.current);setSelected(index);}} onKeyDown={event=>{
           let next;
           if(event.key==='ArrowRight')next=(index+1)%content.companyStats.length;
           else if(event.key==='ArrowLeft')next=(index-1+content.companyStats.length)%content.companyStats.length;
           else if(event.key==='Home')next=0;
           else if(event.key==='End')next=content.companyStats.length-1;
           else return;
-          event.preventDefault();setSelected(next);document.getElementById(`${id}-tab-${next}`)?.focus();
+          event.preventDefault();clearTimeout(settle.current);setSelected(next);document.getElementById(`${id}-tab-${next}`)?.focus();
         }}>
           <span className="impact-liquid-lens" aria-hidden="true" />
           <span className="impact-liquid-ripple" aria-hidden="true" />
@@ -104,7 +104,7 @@ export function CompanyHighlights() {
     </div>
     {content.companyStats.length>0&&<div className="impact-story" role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-tab-${active}`}>
       <div className="impact-story-stack">{stories.map((item,index)=><div key={item.page} className="impact-story-copy" data-active={active===index || (active>=stories.length && index===0)} aria-hidden={!(active===index || (active>=stories.length && index===0))}><span className="eyebrow">{item.eyebrow}</span><h3>{item.title}</h3><p>{item.text}</p></div>)}</div>
-      <button className="pill impact-action" onClick={()=>navigateTo(story.page)}>{story.action}<ArrowUpRight size={17}/></button>
+      <button className="pill impact-action" onClick={()=>navigateTo(story.page)}><span className="impact-action-labels">{stories.map(item=><span key={item.page} style={{visibility:item===story?'visible':'hidden'}} aria-hidden={item!==story}>{item.action}</span>)}</span><ArrowUpRight size={17}/></button>
     </div>}
   </section>;
 }

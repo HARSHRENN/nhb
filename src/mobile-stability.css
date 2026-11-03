@@ -57,3 +57,31 @@ html, body { width:100%; max-width:100%; margin:0; overscroll-behavior-x:none; }
   .impact-story .impact-action { align-self:flex-start; min-height:46px; }
 }
 @media(max-width:480px) { .impact-story .impact-action { width:100%; } }
+
+/* Keep action labels the same size as the card selection changes. */
+.impact-action-labels { display:grid; min-width:0; }
+.impact-action-labels > span { grid-area:1/1; }
+
+/* Each phone swipe lands on a complete card, including the final card. */
+@media(max-width:760px) {
+  .impact-section .impact-grid {
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    contain:inline-size;
+    perspective:none;
+    padding-inline:0;
+    scroll-padding-inline:0;
+    overscroll-behavior-x:none;
+  }
+  .impact-section .impact-card {
+    flex:0 0 100%;
+    max-width:100%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    transform:none;
+  }
+  .filter-row, .photo-story-tabs { min-width:0; contain:inline-size; }
+  .impact-story .impact-action { max-width:100%; }
+  .impact-action-labels { overflow-wrap:anywhere; }
+}
