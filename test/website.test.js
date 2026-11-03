@@ -4,7 +4,7 @@ import {spawn} from 'node:child_process';
 import {mkdtemp,rm,readFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
-import {videoEmbedUrl,mediaUrl} from '../src/lib/media.js';
+import {videoEmbedUrl,mediaUrl,directVideoUrl,playableVideoUrl} from '../src/lib/media.js';
 
 test('normalizes video links and rejects unsupported embeds',()=>{
  assert.equal(videoEmbedUrl('https://www.youtube.com/watch?v=abcdefghijk&t=30'),'https://www.youtube-nocookie.com/embed/abcdefghijk?rel=0');
@@ -12,6 +12,12 @@ test('normalizes video links and rejects unsupported embeds',()=>{
  assert.equal(videoEmbedUrl('https://vimeo.com/123456'),'https://player.vimeo.com/video/123456');
  for(const url of ['javascript:alert(1)','http://youtube.com/watch?v=abcdefghijk','https://youtube.com.attacker.test/watch?v=abcdefghijk','https://example.com/movie'])assert.equal(videoEmbedUrl(url),'');
  assert.equal(mediaUrl('/uploads/photo.webp'),'/uploads/photo.webp');assert.equal(mediaUrl('//attacker.test/photo'),'');
+});
+
+test('supports supplied MP4 films while rejecting unsafe video URLs', () => {
+ for (const name of ['short', 'full']) assert.equal(playableVideoUrl(`/videos/nhb-corporate-${name}.mp4`), `/videos/nhb-corporate-${name}.mp4`);
+ assert.equal(directVideoUrl('https://example.com/film.mp4?token=abc'), 'https://example.com/film.mp4?token=abc');
+ for (const url of ['javascript:alert(1)', '//example.com/film.mp4', '/videos/../private.mp4', '/videos/film.webm', 'http://example.com/film.mp4', 'https://user:pass@example.com/film.mp4']) assert.equal(directVideoUrl(url), '');
 });
 
 test('CMS publication, forms, uploads, metadata and persistence',async t=>{
@@ -44,6 +50,19 @@ test('CMS publication, forms, uploads, metadata and persistence',async t=>{
  assert.equal((await request('/api/gallery')).data.length,0);
  await request(`/api/gallery/${mediaId}`,{method:'PUT',admin:true,body:{published:true,caption:'Edited caption'}});
  const published=(await request('/api/gallery')).data[0];assert.equal(published.caption,'Edited caption');assert.match(published.videoUrl,/youtube-nocookie/);assert.equal(published.featured,true);
+ for (const name of ['short', 'full']) {
+  const url = `/videos/nhb-corporate-${name}.mp4`;
+  const film = await fetch(base + url, {headers: {Range: 'bytes=0-1023'}});
+  assert.equal(film.status, 206);
+  assert.match(film.headers.get('content-type'), /video\/mp4/);
+  assert.match(film.headers.get('content-range'), /^bytes 0-1023\/\d+$/);
+  assert.equal((await film.arrayBuffer()).byteLength, 1024);
+  const draft = await request('/api/gallery', {method:'POST', admin:true, body:{...media, videoUrl:url}});
+  assert.equal(draft.status, 201);
+  assert.equal(draft.data.videoUrl, url);
+  await request(`/api/gallery/${draft.data.id}`, {method:'DELETE', admin:true});
+  assert.equal((await request('/api/content', {method:'PUT', admin:true, body:{corporateVideoUrl:url}})).status, 200);
+ }
  const certificate=new FormData();certificate.append('document',new Blob(['%PDF-1.7\nTest certificate'],{type:'application/pdf'}),'certificate.pdf');
  response=await request('/api/documents/upload',{method:'POST',admin:true,body:certificate});assert.equal(response.status,201);assert.match(response.data.url,/\.pdf$/);assert.equal((await fetch(base+response.data.url)).status,200);
  const certificateUrl=response.data.url;

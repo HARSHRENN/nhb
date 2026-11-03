@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { defaultContent, pageMeta } from '../data/siteContent';
 import { api } from '../lib/api';
+import { siteVideos } from '../data/siteVideos';
 import { trackEvent } from '../lib/analytics';
 const DataContext = createContext(null);
 const currentPage = () => location.hash.slice(1) || location.pathname.replace(/^\/|\/$/g, '') || 'home';
@@ -10,7 +11,7 @@ export function DataProvider({
   const [activePage, setActivePage] = useState(currentPage);
   const [content, setContent] = useState(defaultContent);
   const [jobs, setJobs] = useState([]);
-  const [gallery, setGallery] = useState([]);
+  const [gallery, setGallery] = useState(siteVideos);
   const [pages, setPages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
@@ -23,7 +24,7 @@ export function DataProvider({
         ...c
       });
       setJobs(j);
-      setGallery(g);
+      setGallery([...siteVideos.filter(film => !g.some(item => item.videoUrl === film.videoUrl)), ...g]);
       setPages(p);
       setLoadError('');
     } catch (e) {

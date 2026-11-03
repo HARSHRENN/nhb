@@ -323,7 +323,7 @@ button:focus-visible,a:focus-visible { outline:3px solid #0071e3; outline-offset
 .dialog-heading { display:flex; align-items:center; justify-content:space-between; gap:15px; padding:18px 22px; font-size:12px; }
 .dialog-heading h2 { font-size:21px; }
 .dialog-heading button { padding:5px; }
-.video-dialog iframe,.lightbox-media iframe { width:100%; aspect-ratio:16/9; border:0; display:block; }
+.video-dialog iframe,.lightbox-media iframe,.video-dialog video,.lightbox-media video { width:100%; aspect-ratio:16/9; border:0; display:block; }
 .lightbox-media { background:#dfe7f0; }
 .lightbox-media>img { max-height:55vh; max-width:100%; object-fit:contain; margin:auto; }
 .lightbox-caption { padding:24px; }
@@ -412,3 +412,5 @@ button:focus-visible,a:focus-visible { outline:3px solid #0071e3; outline-offset
   --ring: #0071e3;
   --radius: 0.75rem;
 }
+
+.video-dialog video,.lightbox-media video { background:#111; object-fit:contain; max-height:65dvh; }

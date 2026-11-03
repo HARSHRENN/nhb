@@ -16,9 +16,21 @@ export function videoEmbedUrl(value) {
   } catch {/* Invalid or unsupported URL. */}
   return '';
 }
+export function directVideoUrl(value) {
+  if (typeof value !== 'string') return '';
+  if (/^\/(?:videos|uploads)\/[\w-]+\.mp4$/.test(value)) return value;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && !url.username && !url.password && /\.mp4$/i.test(url.pathname) ? url.href : '';
+  } catch {
+    return '';
+  }
+}
+export const playableVideoUrl = value => directVideoUrl(value) || videoEmbedUrl(value);
 export function mediaUrl(value) {
   if (typeof value !== 'string') return '';
   if (/^\/uploads\/[\w.-]+$/.test(value)) return value;
+  if (/^\/images\/nhb\/[\w-]+\.webp$/.test(value)) return value;
   try {
     const url = new URL(value);
     return url.protocol === 'https:' ? url.href : '';

@@ -36,12 +36,12 @@ Clean URLs and direct page reloads work in Vite and the production Express serve
 
 ## Content and configuration still required
 
-- Approved corporate video YouTube/Vimeo URL, real plant/people photos, Kaizen media, dates, captions and improvement stories.
+- Corporate-video publishing configuration, and reviewed event dates, captions and improvement stories for CMS gallery records.
 - Confirmed vacancies and final EVP wording.
 - Approved company facts, product details, certification documents, phone number, email contacts and precise plant location. Missing phone and sales/general email fields are left blank rather than invented.
 - GA4 property measurement ID and production hosting/domain configuration.
 
-Legacy demo jobs/media remain in the existing database as unpublished records labelled in the admin. Existing example reviews and inquiries are not shown as genuine submissions. The first startup with the new server backs up the original database to `server/data/db.pre-brief.json` before migrating it. No real company video or photography was supplied in the briefs, so the public site does not publish unrelated demo videos or stock photos as NHB assets.
+Legacy demo jobs/media remain in the existing database as unpublished records labelled in the admin. Existing example reviews and inquiries are not shown as genuine submissions. The first startup with the new server backs up the original database to `server/data/db.pre-brief.json` before migrating it. The public photo collection now uses the supplied NHB presentation photography; legacy demo records remain unpublished.
 
 ## Analytics
 
@@ -93,16 +93,16 @@ npx shadcn@latest add button
 
 For a fresh project without this setup, follow the [official shadcn Vite guide](https://ui.shadcn.com/docs/installation/vite); this existing project is already configured, so initialization is unnecessary.
 
-## Illustrative imagery and professional motion
+## NHB photography and motion
 
-The steel-ball hero graphic has been removed. The homepage now uses a locally stored AI-generated workshop illustration, plus downloaded manufacturing photos used under the Unsplash License. About, Lean & Learning and Careers use supporting imagery; approved CMS photos take precedence where available. None of the illustrative assets is published into the real Kaizen gallery or presented as evidence of NHB facilities. Sources are recorded in `docs/image-assets.json` and the standalone `/image-credits.html` reference page. Per-image credit overlays and links have been removed from the website at the user’s request. Exact asset paths, source URLs, usage terms and the final generation prompt are in `docs/image-assets.json`.
+The public site uses 20 NHB photographs extracted from the supplied `KBM1.pptx`, `Process Flow.pptx` and `Dasehra presentation.pptx` decks. All 16 photo collection entries and the standalone images on Home, About, Careers and Lean & Learning now use these photographs. The hero rotates through the campus, lapping area, inspection equipment and practical workshop activity. CMS-supplied plant and people photos retain precedence over the bundled defaults.
 
-Motion is implemented without another animation dependency: IntersectionObserver scroll reveals, a requestAnimationFrame count-up for numeric company statistics (dates are kept static), scroll progress, icon hover responses, a short gentle hero-caption drift, and a flowing Kaizen process graphic. Counters retain their complete values for screen readers. Motion respects `prefers-reduced-motion`; reveal content is visible when observers are unavailable, and decorative animations pause when the tab is hidden. No autoplaying video, fabricated plant footage or example Kaizen results were added. Browser visual review remains required when browser automation is available.
+Assets live in `public/images/nhb/` as WebP files, resized without upscaling to a maximum 1600 px edge. `docs/nhb-photo-assets.json` records the exact presentation, media part, slide and source hash for each asset. The Kaizen group photo is isolated from a composite slide graphic; decorative graphics, screenshots with application chrome and duplicate images were excluded. The original decks remain unchanged. Previous AI-generated and stock image files, including generated raster icons, have been removed from the project. `docs/image-assets.json` points to the active photography manifest. `/image-credits.html` describes the current photography sources.
 
-Interactive photo stories use locally stored images with category tabs, thumbnail selection, previous/next controls and keyboard navigation. Photo mosaics on About, Products, Lean and Careers open accessible enlarged views. The stock-image collection stays separate from the CMS-managed documentary Kaizen gallery.
-
-The editorial collection now contains 16 engineering photographs and one generated hero illustration. Home and Gallery include a filterable photo wall with People, Engineering and Details categories, progressive Show more loading, and enlarged-view navigation. The hero has a manually controlled four-image gallery, thumbnails and touch swiping; it does not auto-advance. Stock/editorial scenes remain separate from CMS-published NHB event records.
+The gallery supports category filters, progressive loading and enlarged views. Captions and alternative text describe the supplied NHB photographs. These bundled photos remain separate from CMS-managed event records; no event dates or improvement results were invented. Decorative motion respects reduced-motion preferences.
 
 Phone layouts are consolidated in `src/mobile.css`, imported after the site theme. Breakpoints at 1050, 760, 480 and 380 px cover navigation collapse, stacked content, image grids and narrow phones. Mobile inputs use 16 px text, primary controls have 44 px targets, dialogs use dynamic viewport limits, and the hero distinguishes horizontal image swipes from vertical scrolling. Mobile menu Escape/resize behavior is handled in `Header.jsx`. Build/type checks pass; actual browser viewport and device testing remains pending because the browser host is unavailable.
 
 The second phone-layout pass stacks the hero through 900 px, bounds its slideshow height, uses horizontally scrollable category controls, shows swipeable highlight cards and single-column photo walls on narrow phones, and improves narrow-screen form spacing. The WebGL desktop navigation is not mounted below 1051 px, reducing unnecessary phone graphics work. Mobile menus close on outside taps, Escape, route changes and resizing to desktop. Visual device testing is still pending because the browser host remains unavailable.
+
+The supplied NHB corporate films are served from `public/videos/` as web-ready H.264/AAC MP4 files with fast start. Both the short and full versions are linked from Home and Gallery. File provenance and checksums are recorded in `docs/nhb-video-assets.json`. The CMS also accepts HTTPS MP4 URLs and YouTube/Vimeo links.

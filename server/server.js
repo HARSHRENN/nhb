@@ -5,7 +5,7 @@ import path from 'node:path';
 import { randomUUID, timingSafeEqual } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { defaultContent, pageMeta } from '../src/data/siteContent.js';
-import { videoEmbedUrl, mediaUrl } from '../src/lib/media.js';
+import { playableVideoUrl, mediaUrl } from '../src/lib/media.js';
 const root = path.dirname(fileURLToPath(import.meta.url));
 const dataDir = process.env.DATA_DIR || path.join(root, 'data');
 const uploadsDir = path.join(dataDir, 'uploads');
@@ -131,7 +131,7 @@ app.put('/api/content', admin, (req, res, next) => {
       ...db.content,
       ...req.body
     };
-    if (c.corporateVideoUrl && !videoEmbedUrl(c.corporateVideoUrl)) throw fail('Use a valid YouTube or Vimeo link.');
+    if (c.corporateVideoUrl && !playableVideoUrl(c.corporateVideoUrl)) throw fail('Use an MP4, YouTube or Vimeo video URL.');
     for (const key of ['corporateVideoThumbnail', 'peoplePhoto', 'plantPhoto']) if (c[key] && !mediaUrl(c[key])) throw fail(`Invalid ${key} URL.`);
     for (const key of ['contactEmail', 'careersEmail', 'salesEmail']) if (c[key] && !emailValid(c[key])) throw fail(`Invalid ${key}.`);
     if (!Array.isArray(c.products) || !Array.isArray(c.companyStats) || !Array.isArray(c.evpTiles) || !Array.isArray(c.certifications)) throw fail('Invalid content lists.');
@@ -184,7 +184,7 @@ const validateGallery = b => {
   requireText(b, ['title', 'caption', 'date']);
   if (!['photo', 'video'].includes(b.type)) throw fail('Select photo or video.');
   if (!['Kaizen Events', 'Plant', 'Training', 'Events'].includes(b.category)) throw fail('Select a gallery category.');
-  if (b.type === 'video' && !videoEmbedUrl(b.videoUrl)) throw fail('Use a YouTube or Vimeo video link.');
+  if (b.type === 'video' && !playableVideoUrl(b.videoUrl)) throw fail('Use an MP4, YouTube or Vimeo video URL.');
   if (b.type === 'photo' && !mediaUrl(b.imageUrl)) throw fail('Upload a photo or provide an HTTPS image URL.');
   for (const key of ['thumbnailUrl', 'beforeImageUrl', 'afterImageUrl']) if (b[key] && !mediaUrl(b[key])) throw fail(`Invalid ${key}.`);
   return {
@@ -194,7 +194,7 @@ const validateGallery = b => {
     date: b.date,
     category: b.category,
     imageUrl: mediaUrl(b.imageUrl),
-    videoUrl: videoEmbedUrl(b.videoUrl),
+    videoUrl: playableVideoUrl(b.videoUrl),
     thumbnailUrl: mediaUrl(b.thumbnailUrl),
     beforeImageUrl: mediaUrl(b.beforeImageUrl),
     afterImageUrl: mediaUrl(b.afterImageUrl),

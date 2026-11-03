@@ -1,0 +1,19 @@
+{
+  "sourceDirectory": "Downloads/assests",
+  "videos": [
+    {
+      "file": "public/videos/nhb-corporate-short.mp4",
+      "source": "NHB_Corporate Video_short.mp4",
+      "bytes": 14089456,
+      "sha256": "6a3c902260eb96ac3b34d886387060b9cf8e89157e73cec23be56dc66d0897bb",
+      "encoding": "H.264, 1280x720, AAC stereo, MP4 fast start"
+    },
+    {
+      "file": "public/videos/nhb-corporate-full.mp4",
+      "source": "NHB_Corporate Video_Full.mp4",
+      "bytes": 62977334,
+      "sha256": "e420c1859c1da7cddd52daee10cc0f93b28ca59729099f3fec9056fa05ef93b1",
+      "encoding": "H.264, 1280x720, AAC stereo, MP4 fast start"
+    }
+  ]
+}

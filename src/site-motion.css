@@ -128,7 +128,6 @@ html[data-page-hidden='true'] .track-flow,html[data-page-hidden='true'] .hero-vi
  .photo-feature-image:hover>img,.photo-mosaic>button:hover img { transform:none; }
  .photo-mosaic img,.photo-thumbnail-grid>button,.photo-story-tabs button,.photo-navigation button { transition:none; }
 }
-img[src$="engineering-team.jpg"] { object-position:center 70%; }
 
 /* Medium-sized, interactive company highlights. */
 .company-numbers strong > span { font:inherit; color:inherit; letter-spacing:inherit; margin:0; }
@@ -171,7 +170,6 @@ img[src$="engineering-team.jpg"] { object-position:center 70%; }
 .hero-image-gallery { position:relative; height:500px; border-radius:34px 34px 90px 34px; overflow:hidden; background:#d9e6dc; box-shadow:0 25px 65px #1638321a; }
 .hero-gallery-main { display:block; width:100%; height:100%; }
 .hero-gallery-main>img { width:100%; height:100%; object-fit:cover; object-position:center 60%; animation:photo-arrive .45s ease; }
-.hero-gallery-main>img[src$="manufacturing-vision.jpg"] { object-position:62% center; }
 .hero-gallery-enlarge { position:absolute; right:20px; top:20px; width:38px; height:38px; display:grid; place-items:center; border-radius:50%; color:#163832; background:#ffffffad; }
 .hero-gallery-controls { position:absolute; top:20px; left:20px; display:flex; align-items:center; gap:10px; border:1px solid #ffffff80; border-radius:30px; padding:4px; background:#f4fff0bd; backdrop-filter:blur(12px); color:#285445; }
 .hero-gallery-controls button { width:27px; height:27px; display:grid; place-items:center; border-radius:50%; }
@@ -190,5 +188,4 @@ img[src$="engineering-team.jpg"] { object-position:center 70%; }
 /* Automatic hero slideshow: two-second cadence, no manual controls. */
 .hero-auto-gallery .hero-auto-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 60%; opacity:0; transition:opacity .6s ease; pointer-events:none; }
 .hero-auto-gallery .hero-auto-slide.is-active { opacity:1; }
-.hero-auto-gallery .hero-auto-slide[src$="manufacturing-vision.jpg"] { object-position:62% center; }
 @media(prefers-reduced-motion:reduce) { .hero-auto-gallery .hero-auto-slide { transition:none; } }

@@ -1,3 +1,4 @@
+import { nhbImages } from '../data/editorialScenes';
 import { KanbanExample } from '../components/KanbanExample';
 import { PhotoMosaic } from '../components/PhotoExplorer';
 import { EditorialImage } from '../components/EditorialImage';
@@ -27,7 +28,7 @@ export function LeanCulturePage() {
       <p>{content.leanIntro}</p>
     </section>
 
-    <section className="brief-section wrap editorial-band"><EditorialImage src={content.plantPhoto || '/images/india-kaizen.jpg'} alt={content.plantPhoto ? 'NHB plant' : 'AI-generated illustration of Indian staff and an international lean mentor'} credit={content.plantPhoto ? 'NHB photography' : 'AI-generated illustration'} /><div><span className="eyebrow">SMALL IMPROVEMENTS ADD UP</span><h2>Look closely.<br/>Make it better.</h2><p>Every workstation is a place to learn. Every person brings a perspective worth listening to.</p></div></section>
+    <section className="brief-section wrap editorial-band"><EditorialImage src={content.plantPhoto || nhbImages.campus.image} alt={content.plantPhoto ? 'NHB plant' : nhbImages.campus.alt} /><div><span className="eyebrow">SMALL IMPROVEMENTS ADD UP</span><h2>Look closely.<br/>Make it better.</h2><p>Every workstation is a place to learn. Every person brings a perspective worth listening to.</p></div></section>
     <section className="brief-section wrap" aria-labelledby="lean-principles">
       <span className="eyebrow">HOW WE WORK</span>
       <h2 id="lean-principles">Improvement belongs to everyone.</h2>

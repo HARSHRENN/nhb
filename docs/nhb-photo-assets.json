@@ -1,0 +1,393 @@
+{
+  "updatedOn": "2026-11-03",
+  "sourceDirectory": "Downloads/assests",
+  "purpose": "User-supplied NHB photography extracted from presentation media to replace stock and generated website images.",
+  "processing": "Original embedded images extracted without slide chrome; the team photo is isolated from its composite slide graphic. EXIF orientation applied, resized without upscaling to a maximum 1600px edge and encoded as WebP.",
+  "assets": [
+    {
+      "path": "public/images/nhb/kaizen-team.webp",
+      "sourceDeck": "Dasehra presentation.pptx",
+      "sourcePart": "ppt/media/image7.png",
+      "sourceSlides": [
+        3
+      ],
+      "sourceSha256": "85ce1db87eae3e93f18f5b3fb4a2d12d23c548ff9c6c06fc98ed45a25cef6821",
+      "originalDimensions": [
+        859,
+        433
+      ],
+      "crop": [
+        200,
+        109,
+        623,
+        424
+      ],
+      "dimensions": [
+        423,
+        315
+      ],
+      "bytes": 41754
+    },
+    {
+      "path": "public/images/nhb/flashing-machines.webp",
+      "sourceDeck": "Process Flow.pptx",
+      "sourcePart": "ppt/media/image39.jpeg",
+      "sourceSlides": [
+        8
+      ],
+      "sourceSha256": "e25d49c93ed6991b3555e06e5d3c5e4986e649bad063c299f0571563ff4be1e8",
+      "originalDimensions": [
+        1280,
+        720
+      ],
+      "crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "bytes": 154466
+    },
+    {
+      "path": "public/images/nhb/optical-scanners.webp",
+      "sourceDeck": "KBM1.pptx",
+      "sourcePart": "ppt/media/image10.jpeg",
+      "sourceSlides": [
+        7
+      ],
+      "sourceSha256": "2ff10f9b3d7b81c5890290717843c7c1eef9909fc229859bcc33943bb4d9c37a",
+      "originalDimensions": [
+        1936,
+        1089
+      ],
+      "crop": null,
+      "dimensions": [
+        1600,
+        900
+      ],
+      "bytes": 125916
+    },
+    {
+      "path": "public/images/nhb/workshop-learning.webp",
+      "sourceDeck": "Dasehra presentation.pptx",
+      "sourcePart": "ppt/media/image12.jpeg",
+      "sourceSlides": [
+        5
+      ],
+      "sourceSha256": "d0ec1e92a9e90bc87f6eaab279151bddc97d235da855d45d27e8c466e18ccd22",
+      "originalDimensions": [
+        960,
+        1280
+      ],
+      "crop": null,
+      "dimensions": [
+        960,
+        1280
+      ],
+      "bytes": 178882
+    },
+    {
+      "path": "public/images/nhb/saral-production-line.webp",
+      "sourceDeck": "KBM1.pptx",
+      "sourcePart": "ppt/media/image12.jpeg",
+      "sourceSlides": [
+        9
+      ],
+      "sourceSha256": "81ce1c09a67fc0459323dca510048bdd4d6743997dec04c80f51da013ebbe474",
+      "originalDimensions": [
+        2200,
+        1651
+      ],
+      "crop": null,
+      "dimensions": [
+        1600,
+        1201
+      ],
+      "bytes": 180698
+    },
+    {
+      "path": "public/images/nhb/workshop-craft.webp",
+      "sourceDeck": "Dasehra presentation.pptx",
+      "sourcePart": "ppt/media/image14.jpeg",
+      "sourceSlides": [
+        5
+      ],
+      "sourceSha256": "f0427f955d01009505fd41f107357d4d7b2b62971678d0b020b7ce558b7bb935",
+      "originalDimensions": [
+        3072,
+        4096
+      ],
+      "crop": null,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "bytes": 273356
+    },
+    {
+      "path": "public/images/nhb/hands-on-improvement.webp",
+      "sourceDeck": "Dasehra presentation.pptx",
+      "sourcePart": "ppt/media/image13.jpeg",
+      "sourceSlides": [
+        5
+      ],
+      "sourceSha256": "e9f5fc737b6cfd6252f031d2e7f6ad83df4ee75e9b7509d55a1ae483fc45ebd1",
+      "originalDimensions": [
+        4096,
+        3072
+      ],
+      "crop": null,
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "bytes": 416188
+    },
+    {
+      "path": "public/images/nhb/lapping-machines.webp",
+      "sourceDeck": "KBM1.pptx",
+      "sourcePart": "ppt/media/image7.jpeg",
+      "sourceSlides": [
+        4
+      ],
+      "sourceSha256": "e0814359d1df65ff9cd19679e96ff024af9ea0e55c21ddf96da32a1458f7ec7e",
+      "originalDimensions": [
+        736,
+        552
+      ],
+      "crop": null,
+      "dimensions": [
+        736,
+        552
+      ],
+      "bytes": 59662
+    },
+    {
+      "path": "public/images/nhb/moonshine-prototype.webp",
+      "sourceDeck": "Dasehra presentation.pptx",
+      "sourcePart": "ppt/media/image9.jpeg",
+      "sourceSlides": [
+        4
+      ],
+      "sourceSha256": "5731393b9a0a08602684036364ea99d92820377044da40f904c6d4e596b02f60",
+      "originalDimensions": [
+        1280,
+        960
+      ],
+      "crop": null,
+      "dimensions": [
+        1280,
+        960
+      ],
+      "bytes": 165520
+    },
+    {
+      "path": "public/images/nhb/scanning-room.webp",
+      "sourceDeck": "KBM1.pptx",
+      "sourcePart": "ppt/media/image9.jpeg",
+      "sourceSlides": [
+        6
+      ],
+      "sourceSha256": "5099fba580cc29d53bf91492094d3454bfc0af147c7c185aa21b956fb671baff",
+      "originalDimensions": [
+        1564,
+        1173
+      ],
+      "crop": null,
+      "dimensions": [
+        1564,
+        1173
+      ],
+      "bytes": 147600
+    },
+    {
+      "path": "public/images/nhb/prototype-workbench.webp",
+      "sourceDeck": "Dasehra presentation.pptx",
+      "sourcePart": "ppt/media/image10.jpeg",
+      "sourceSlides": [
+        4
+      ],
+      "sourceSha256": "a27127d6a5b3fa9e8ba4e745d8732332825d2d1c152eb1cca1ba7841d1241f75",
+      "originalDimensions": [
+        1280,
+        960
+      ],
+      "crop": null,
+      "dimensions": [
+        1280,
+        960
+      ],
+      "bytes": 205776
+    },
+    {
+      "path": "public/images/nhb/lapping-wheel.webp",
+      "sourceDeck": "Dasehra presentation.pptx",
+      "sourcePart": "ppt/media/image23.jpeg",
+      "sourceSlides": [
+        6
+      ],
+      "sourceSha256": "87b713f66a80952db1b82b455454f3b6f6bfa340809940964bdb61b239f5dad0",
+      "originalDimensions": [
+        1200,
+        1600
+      ],
+      "crop": null,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "bytes": 361742
+    },
+    {
+      "path": "public/images/nhb/improvement-cell.webp",
+      "sourceDeck": "Dasehra presentation.pptx",
+      "sourcePart": "ppt/media/image8.jpeg",
+      "sourceSlides": [
+        4
+      ],
+      "sourceSha256": "febb14825780ce2997d016732d77028c2b4491c3fe99a583403e5a2cc2c1168f",
+      "originalDimensions": [
+        1280,
+        960
+      ],
+      "crop": null,
+      "dimensions": [
+        1280,
+        960
+      ],
+      "bytes": 151612
+    },
+    {
+      "path": "public/images/nhb/process-control.webp",
+      "sourceDeck": "Process Flow.pptx",
+      "sourcePart": "ppt/media/image32.jpeg",
+      "sourceSlides": [
+        7
+      ],
+      "sourceSha256": "85b9dd5cc955317947758096570d28c7c8295c3dac3f7d08cbf089192854e272",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "crop": null,
+      "dimensions": [
+        1024,
+        768
+      ],
+      "bytes": 50208
+    },
+    {
+      "path": "public/images/nhb/packing-line.webp",
+      "sourceDeck": "KBM1.pptx",
+      "sourcePart": "ppt/media/image11.jpeg",
+      "sourceSlides": [
+        8
+      ],
+      "sourceSha256": "103c8d6b4bb052996377e4aa45da594e0d2f8c1cc01c30f721da5b5f676cb5b7",
+      "originalDimensions": [
+        680,
+        510
+      ],
+      "crop": null,
+      "dimensions": [
+        680,
+        510
+      ],
+      "bytes": 51702
+    },
+    {
+      "path": "public/images/nhb/organized-tools.webp",
+      "sourceDeck": "Dasehra presentation.pptx",
+      "sourcePart": "ppt/media/image21.jpeg",
+      "sourceSlides": [
+        5
+      ],
+      "sourceSha256": "002a4c63486e6d3888dea7149dccd45b4240733f3b760ffe8375d42fd9a79164",
+      "originalDimensions": [
+        1200,
+        1600
+      ],
+      "crop": null,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "bytes": 325104
+    },
+    {
+      "path": "public/images/nhb/campus.webp",
+      "sourceDeck": "KBM1.pptx",
+      "sourcePart": "ppt/media/image6.jpeg",
+      "sourceSlides": [
+        3
+      ],
+      "sourceSha256": "e1c780a0c1b0c3495db195428e8431fbc100e62d490f6ad0d6d4e92b3f27c476",
+      "originalDimensions": [
+        2200,
+        1651
+      ],
+      "crop": null,
+      "dimensions": [
+        1600,
+        1201
+      ],
+      "bytes": 420838
+    },
+    {
+      "path": "public/images/nhb/campus-garden.webp",
+      "sourceDeck": "KBM1.pptx",
+      "sourcePart": "ppt/media/image5.jpeg",
+      "sourceSlides": [
+        2
+      ],
+      "sourceSha256": "c889a3f779fa23f4e2b1f17f656a6124c0bb6676710e12c9d4bfe3747c8a87c9",
+      "originalDimensions": [
+        2200,
+        1651
+      ],
+      "crop": null,
+      "dimensions": [
+        1600,
+        1201
+      ],
+      "bytes": 394738
+    },
+    {
+      "path": "public/images/nhb/plant-aerial.webp",
+      "sourceDeck": "Process Flow.pptx",
+      "sourcePart": "ppt/media/image27.jpeg",
+      "sourceSlides": [
+        6
+      ],
+      "sourceSha256": "cdae378b333570dbe5a70ec698cdc4dd149e81d9aaf0dc5891fb8faa43665161",
+      "originalDimensions": [
+        886,
+        500
+      ],
+      "crop": null,
+      "dimensions": [
+        886,
+        500
+      ],
+      "bytes": 91608
+    },
+    {
+      "path": "public/images/nhb/second-lapping.webp",
+      "sourceDeck": "KBM1.pptx",
+      "sourcePart": "ppt/media/image8.jpeg",
+      "sourceSlides": [
+        5
+      ],
+      "sourceSha256": "380d9a1a1c85bc733917d4818345d48bb1a7f833496746a880e45eeedfdfedfb",
+      "originalDimensions": [
+        683,
+        512
+      ],
+      "crop": null,
+      "dimensions": [
+        683,
+        512
+      ],
+      "bytes": 39864
+    }
+  ]
+}
